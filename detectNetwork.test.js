@@ -129,27 +129,73 @@ describe('MasterCard', function() {
   // and should, but that's just for learning), so once you've gotten 
   // these tests to pass using should syntax, refactor your tests to 
   // use either expect or should, but not both. 
-  var should = chai.should();
   
   it('has a prefix of 54 and a length of 16', function() {
-    detectNetwork('5412345678901234').should.equal("MasterCard");
+    expect(detectNetwork('5412345678901234')).to.equal("MasterCard");
   });
  
   it('has a prefix of 55 and a length of 16', function() {
-    detectNetwork('5512345678901234').should.equal("MasterCard");
-  })
+    expect(detectNetwork('5512345678901234')).to.equal("MasterCard");
+  });
  
 });
 
 describe('Discover', function() {
   // Tests without a function will be marked as "pending" and not run
   // Implement these tests (and others) and make them pass!
-  it('has a prefix of 6011 and a length of 16');
-  it('has a prefix of 6011 and a length of 19');
+  var expect = chai.expect;
+  var discoverPrefix=['65', '644', '645', '646', '647', '648', '649', '6011'];
+
+
+  for(var i = 0; i<discoverPrefix.length; i++){
+    var testNumber=discoverPrefix[i];
+    var prefix = discoverPrefix[i];
+    while (testNumber.length<16){
+      testNumber = testNumber+'0';
+    }
+    (function(prefix,testNumber) {
+      it('has a prefix of ' + prefix + ' and a length of 16', function() {
+        expect(detectNetwork(testNumber)).to.equal('Discover');
+      });
+      })(prefix,testNumber)
+  }
+
+  for(var j = 0 ; j<discoverPrefix.length; j++){
+    var testNumber=discoverPrefix[j];
+    var prefix = parseInt(discoverPrefix[j]);
+    while (testNumber.length<19){
+      testNumber= testNumber + '0';
+    }
+    (function(prefix,testNumber) {
+      it('has a prefix of ' + prefix + ' and a length of 19', function() {
+        expect(detectNetwork(testNumber)).to.equal('Discover');
+      });
+      })(prefix,testNumber)
+  }
+
 });
 
 describe('Maestro', function() {
-  // Write full test coverage for the Maestro card
+var expect = chai.expect;
+var viablePrefix=['5018', '5020', '5038', '6304'];
+var viableLength=[12, 13, 14, 15, 16, 17, 18, 19];
+for (var i = 0; i<viablePrefix.length; i++){
+  for(var j = 0; j < viableLength.length; j++){
+    var prefix = parseInt(viablePrefix[i]);
+    var testNumber = viablePrefix[i];
+    var length = viableLength[j];
+    while (testNumber.length<length){
+      testNumber+='0';
+    }
+    (function(prefix, testNumber, length){
+      it('has a prefix of ' + prefix + ' and a length of ' + length + ' ', function(){
+        expect(detectNetwork(testNumber)).to.equal('Maestro');
+      });
+    })(prefix, testNumber, length)
+  }
+
+}
+
 });
 
 describe('should support China UnionPay')
