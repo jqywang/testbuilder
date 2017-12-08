@@ -23,7 +23,10 @@ var detectNetwork = function(cardNumber) {
   	return "American Express";
   }
   if((parseInt(firstTwo)<56 && parseInt(firstTwo)>50) && cardLength===16){
-  	return "MasterCard"
+  	return "MasterCard";
+  }
+  if(firstOne === '4' && (cardLength === 13 || cardLength === 16 || cardLength === 19)){
+  	return "Visa";
   }
 
 	/*var numberLength = cardNumber.length;
