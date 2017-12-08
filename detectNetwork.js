@@ -15,6 +15,8 @@ var detectNetwork = function(cardNumber) {
 	var firstTwo = cardNumber.slice(0,2);
 	var cardLength = cardNumber.length;
 	var firstOne = cardNumber.slice(0,1);
+	var firstThree = cardNumber.slice(0,3);
+	var firstFour = cardNumber.slice(0,4);
 
   if ((firstTwo === "38" || firstTwo === "39") && cardLength === 14) {
   	return "Diner\'s Club";
@@ -27,6 +29,14 @@ var detectNetwork = function(cardNumber) {
   }
   if(firstOne === '4' && (cardLength === 13 || cardLength === 16 || cardLength === 19)){
   	return "Visa";
+  } 
+  if ((firstTwo === '65' || (parseInt(firstThree) < 650 && parstInt(firstThree) > 643) || firstFour === '6011')
+  	&& (cardLength === 16 || cardLength === 19)){
+  	return "Discover";
+  } 
+  if ((firstFour === '5018' || firstFour === '5020' || firstFour === '5038' || firstFour === '6304') && 
+  	(cardLength < 20 && cardLength > 11)){
+  	return "Maestro";
   }
 
 	/*var numberLength = cardNumber.length;
