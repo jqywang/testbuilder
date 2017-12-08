@@ -7,6 +7,16 @@
 //   1. The first few numbers (called the prefix)
 //   2. The number of digits in the number (called the length)
 
+function viablePrefix(prefix, listOfPrefix){
+//Switch Prefixes: 4903, 4905, 4911, 4936, 564182, 633110, 6333, 6759
+	for (i=0; i<listOfPrefix.length; i++){
+		if(prefix===listOfPrefix[i]){
+			return true;
+		}
+	}
+	return false;
+}
+
 var detectNetwork = function(cardNumber) {
 	
   if (cardNumber === null || cardNumber === undefined){
@@ -17,6 +27,8 @@ var detectNetwork = function(cardNumber) {
 	var firstOne = cardNumber.slice(0,1);
 	var firstThree = cardNumber.slice(0,3);
 	var firstFour = cardNumber.slice(0,4);
+	var firstSix = cardNumber.slice(0,6);
+	var switchPrefixes=[4903, 4905, 4911, 4936, 564182, 633110, 6333, 6759];
 
   if ((firstTwo === "38" || firstTwo === "39") && cardLength === 14) {
   	return "Diner\'s Club";
@@ -30,7 +42,7 @@ var detectNetwork = function(cardNumber) {
   if(firstOne === '4' && (cardLength === 13 || cardLength === 16 || cardLength === 19)){
   	return "Visa";
   } 
-  if ((firstTwo === '65' || (parseInt(firstThree) < 650 && parstInt(firstThree) > 643) || firstFour === '6011')
+  if ((firstTwo === '65' || (parseInt(firstThree) < 650 && parseInt(firstThree) > 643) || firstFour === '6011')
   	&& (cardLength === 16 || cardLength === 19)){
   	return "Discover";
   } 
@@ -38,22 +50,7 @@ var detectNetwork = function(cardNumber) {
   	(cardLength < 20 && cardLength > 11)){
   	return "Maestro";
   }
-
-	/*var numberLength = cardNumber.length;
-	var firstTwoDigits= cardNumber.slice(0,2);
-	if(numberLength===14 && (firstTwoDigits==='38' || firstTwoDigits==='39')){
-		console.log('Diner\'s Club');
-		return ('Diner\'s Club');
-	} 
-	if (numberLength===15 && (firstTwoDigits==='34' || firstTwoDigits==='37')){
-		console.log("American Express");
-	} 
-
-
-	else if (firstTwoDigits[0]==='4' &&(numberLength===13||numberLength===16||numberLength===19)){
-		console.log("Visa");
-	} 
-	*/
+ 
   // Note: `cardNumber` will always be a string
   // The Diner's Club network always starts with a 38 or 39 and is 14 digits long
   // The American Express network always starts with a 34 or 37 and is 15 digits long
