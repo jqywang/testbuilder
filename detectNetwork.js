@@ -8,8 +8,8 @@
 //   2. The number of digits in the number (called the length)
 
 var detectNetwork = function(cardNumber) {
-	var isFourteen=false;
-	var isFifteen=false;
+	var isFourteen= (cardNumber.length===14);
+	var isFifteen= (cardNumber.length===15);
 	var firstTwoDigits= cardNumber.slice(0,2);
   // Note: `cardNumber` will always be a string
   // The Diner's Club network always starts with a 38 or 39 and is 14 digits long
