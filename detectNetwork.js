@@ -15,8 +15,6 @@ var detectNetwork = function(cardNumber) {
 		console.log("Diner's Club");
 	} else if (isFifteen===true &&(firstTwoDigits==='34'||firstTwoDigits==='37')){
 		console.log("American Express");
-	} else {
-		console.log("Card is neither Diner's Club or American Express");
 	}
   // Note: `cardNumber` will always be a string
   // The Diner's Club network always starts with a 38 or 39 and is 14 digits long
