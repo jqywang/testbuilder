@@ -28,7 +28,7 @@ var detectNetwork = function(cardNumber) {
 	var firstThree = cardNumber.slice(0,3);
 	var firstFour = cardNumber.slice(0,4);
 	var firstSix = cardNumber.slice(0,6);
-	var switchPrefixes=[4903, 4905, 4911, 4936, 564182, 633110, 6333, 6759];
+	var switchPrefixes=['4903', '4905', '4911', '4936', '564182', '633110', '6333', '6759'];
 
   if ((firstTwo === "38" || firstTwo === "39") && cardLength === 14) {
   	return "Diner\'s Club";
@@ -39,7 +39,10 @@ var detectNetwork = function(cardNumber) {
   if((parseInt(firstTwo)<56 && parseInt(firstTwo)>50) && cardLength===16){
   	return "MasterCard";
   }
-  if(firstOne === '4' && (cardLength === 13 || cardLength === 16 || cardLength === 19)){
+  if((viablePrefix(firstFour, switchPrefixes) || viablePrefix(firstSix, switchPrefixes)) && 
+  	(cardLength===16 || cardLength === 18 || cardLength === 19)){
+  	return "Switch";
+  } else if (firstOne === '4' && (cardLength === 13 || cardLength === 16 || cardLength === 19)){
   	return "Visa";
   } 
   if ((firstTwo === '65' || (parseInt(firstThree) < 650 && parseInt(firstThree) > 643) || firstFour === '6011')
