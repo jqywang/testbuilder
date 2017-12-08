@@ -12,7 +12,7 @@ var detectNetwork = function(cardNumber) {
 	var isFifteen = (cardNumber.length===15);
 	var firstTwoDigits= cardNumber.slice(0,2);
 	if(isFourteen===true && (firstTwoDigits==='38' || firstTwoDigits==='39')){
-		console.log("Diner's Club");
+		console.log('Diner\'s Club');
 	} else if (isFifteen===true &&(firstTwoDigits==='34'||firstTwoDigits==='37')){
 		console.log("American Express");
 	}
