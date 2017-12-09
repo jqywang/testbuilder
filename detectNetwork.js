@@ -54,8 +54,8 @@ var detectNetwork = function(cardNumber) {
   	(cardLength < 20 && cardLength > 11)){
   	return "Maestro";
   }
-  if(((parseInt(firstSix) < 622926 && parseInt(firstSix) > 622125) || viablePrefix(firstThree, chinaPayPrefix) ||
-	viablePrefix(firstFour, chinaPayPrefix)) && (cardLength > 15 && cardLength < 19)){
+  if(((parseInt(firstSix) < 622926 && parseInt(firstSix) > 622125) || (viablePrefix(firstThree, chinaPayPrefix) ||
+	viablePrefix(firstFour, chinaPayPrefix))) && (cardLength > 15 && cardLength < 20)){
   	return "China UnionPay";
   }
  
