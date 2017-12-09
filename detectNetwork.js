@@ -8,7 +8,7 @@
 //   2. The number of digits in the number (called the length)
 
 function viablePrefix(prefix, listOfPrefix){
-//Switch Prefixes: 4903, 4905, 4911, 4936, 564182, 633110, 6333, 6759
+
 	for (i=0; i<listOfPrefix.length; i++){
 		if(prefix===listOfPrefix[i]){
 			return true;
@@ -18,7 +18,7 @@ function viablePrefix(prefix, listOfPrefix){
 }
 
 var detectNetwork = function(cardNumber) {
-	
+	//china pay: 622126-622925, 624-626, or 6282-6288 and a length of 16-19
   if (cardNumber === null || cardNumber === undefined){
   	return "null";
   	}
@@ -29,6 +29,7 @@ var detectNetwork = function(cardNumber) {
 	var firstFour = cardNumber.slice(0,4);
 	var firstSix = cardNumber.slice(0,6);
 	var switchPrefixes=['4903', '4905', '4911', '4936', '564182', '633110', '6333', '6759'];
+	var chinaPayPrefix=['624', '625','626', '6282', '6283', '6284', '6285', '6286', '6287', '6288']
 
   if ((firstTwo === "38" || firstTwo === "39") && cardLength === 14) {
   	return "Diner\'s Club";
@@ -52,6 +53,10 @@ var detectNetwork = function(cardNumber) {
   if ((firstFour === '5018' || firstFour === '5020' || firstFour === '5038' || firstFour === '6304') && 
   	(cardLength < 20 && cardLength > 11)){
   	return "Maestro";
+  }
+  if(((parseInt(firstSix) < 622926 && parseInt(firstSix) > 622125) || viablePrefix(firstThree, chinaPayPrefix) ||
+	viablePrefix(firstFour, chinaPayPrefix)) && (cardLength > 15 && cardLength < 19)){
+  	return "China UnionPay";
   }
  
   // Note: `cardNumber` will always be a string
