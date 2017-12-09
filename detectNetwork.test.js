@@ -233,4 +233,25 @@ for (var prefix = 622126; prefix <= 622925; prefix++){
 }
 
 });
-describe('should support Switch')
+describe('Switch', function() {
+var expect = chai.expect;
+var viablePrefix=['4903', '4905', '4911', '4936', '564182', '633110', '6333', '6759'];
+var viableLength=[16, 18, 19];
+for (var i = 0; i<viablePrefix.length; i++){
+  for(var j = 0; j < viableLength.length; j++){
+    var prefix = parseInt(viablePrefix[i]);
+    var testNumber = viablePrefix[i];
+    var length = viableLength[j];
+    while (testNumber.length<length){
+      testNumber+='0';
+    }
+    (function(prefix, testNumber, length){
+      it('has a prefix of ' + prefix + ' and a length of ' + length + ' ', function(){
+        expect(detectNetwork(testNumber)).to.equal('Switch');
+      });
+    })(prefix, testNumber, length)
+  }
+
+}
+
+});
