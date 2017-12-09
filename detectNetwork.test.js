@@ -198,5 +198,39 @@ for (var i = 0; i<viablePrefix.length; i++){
 
 });
 
-describe('should support China UnionPay')
+describe('China UnionPay', function() {
+var expect = chai.expect;
+var viablePrefix=['624', '625','626', '6282', '6283', '6284', '6285', '6286', '6287', '6288'];
+var viableLength=[16, 17, 18, 19];
+for (var i = 0; i<viablePrefix.length; i++){
+  for(var j = 0; j < viableLength.length; j++){
+    var prefix = parseInt(viablePrefix[i]);
+    var testNumber = viablePrefix[i];
+    var length = viableLength[j];
+    while (testNumber.length<length){
+      testNumber+='0';
+    }
+    (function(prefix, testNumber, length){
+      it('has a prefix of ' + prefix + ' and a length of ' + length + ' ', function(){
+        expect(detectNetwork(testNumber)).to.equal('China UnionPay');
+      });
+    })(prefix, testNumber, length)
+  }
+
+}
+for (var prefix = 622126; prefix <= 622925; prefix++){
+  var testNumber=prefix+'';
+  for (var len = 16; len <= 19; len++) {
+    while(testNumber.length < len){
+      testNumber+='0';
+    }
+    (function(len, testNumber, prefix) {
+      it('has a prefix of ' + prefix + 'and a length of ' + len , function() {
+        expect(detectNetwork(testNumber)).to.equal('China UnionPay');
+      });
+    })(len, testNumber, prefix)
+    }
+}
+
+});
 describe('should support Switch')
